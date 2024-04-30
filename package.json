@@ -1,0 +1,25 @@
+{
+    "name": "ton-sdk",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node libs/build.js --watch",
+        "build": "node libs/build.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "yarn@4.1.1",
+    "devDependencies": {
+        "@metacraft/eslint-config": "^0.1.2",
+        "@metacraft/tsconfig": "^0.0.2",
+        "chokidar": "^3.6.0",
+        "esbuild": "^0.20.2",
+        "sst": "^2.41.5"
+    },
+    "dependencies": {
+        "@tonconnect/sdk": "^3.0.2"
+    }
+}

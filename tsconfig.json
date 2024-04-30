@@ -1,0 +1,4 @@
+{
+    "extends": "@metacraft/tsconfig/application.json",
+    "exclude": ["node_modules"]
+}
