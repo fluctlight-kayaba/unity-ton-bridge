@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/TemplateData/icon.png" />
+    <link rel="stylesheet" href="/TemplateData/style.css" />
+    <script type="text/javascript" src="/ton-sdk.js"></script>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px; background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}"></canvas>
@@ -24,7 +27,7 @@
         document.body.style.textAlign = "left";
       }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      var unityConfig = {
         dataUrl: "Build/{{{ DATA_FILENAME }}}",
         frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
 #if USE_THREADS
@@ -45,13 +48,11 @@
         productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
-
-      function myJavascriptFunc() {
-        alert("hello world")
       }
 
-      console.log("Loaded from template!");
+      createUnityInstance(document.querySelector("#unity-canvas"), unityConfig).then(function(unityInstance) {
+        window.unityInstance = unityInstance;
+      });
     </script>
   </body>
 </html>
