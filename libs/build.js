@@ -36,6 +36,16 @@ const buildTonSDK = async () => {
 	}
 };
 
+const buildCrawler = async () => {
+	await build({
+		entryPoints: ['./libs/crawler/index.ts'],
+		bundle: true,
+		outfile: './build/crawler.js',
+		platform: 'node',
+		packages: 'external',
+	});
+};
+
 if (isWatchMode) {
 	watch('./libs', {
 		ignoreInitial: true,
@@ -47,3 +57,4 @@ if (isWatchMode) {
 }
 
 buildTonSDK();
+buildCrawler();
