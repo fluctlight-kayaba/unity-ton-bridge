@@ -1,7 +1,7 @@
 module.exports = {
 	root: true,
 	extends: ['@metacraft/eslint-config'],
-	ignorePatterns: ['node_modules', 'game/Assets/WebGLTemplates'],
+	ignorePatterns: ['node_modules', 'build'],
 	env: {
 		node: true,
 	},
