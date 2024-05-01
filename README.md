@@ -15,3 +15,5 @@
 - To have it bundled (for production) run `yarn build`
 - Create .env file(s) under `libs/crawler` (optional) with following variables: `RPC_ENDPOINT` TON RPC endpoint, `ADMIN_WALLET` Admin walletaddress
 
+### Mint Jetton token for testing:
+- Do it at: https://minter.ton.org/
