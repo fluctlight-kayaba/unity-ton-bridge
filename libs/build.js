@@ -1,6 +1,7 @@
 const { writeFile } = require('fs/promises');
 const { build } = require('esbuild');
 const { watch } = require('chokidar');
+const { polyfillNode } = require('esbuild-plugin-polyfill-node');
 
 const domainUrl = 'http://localhost:8080';
 const isWatchMode = process.argv.includes('--watch');
@@ -19,6 +20,11 @@ const buildTonSDK = async () => {
 			entryPoints: ['./libs/ton-sdk/index.ts'],
 			bundle: true,
 			outfile: './build/game/ton-sdk.js',
+			plugins: [
+				polyfillNode({
+					globals: { buffer: true },
+				}),
+			],
 		});
 
 		await writeFile(
