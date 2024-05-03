@@ -8,10 +8,12 @@ const defaultEndpoint = 'https://testnet.toncenter.com/api/v2/jsonRPC';
 const rpcEndpoint = process.env.RPC_ENDPOINT || defaultEndpoint;
 const defaultAdminWallet = '0QATUnNyja0PmKVxaSEeZXj6N9EVZVYnxEIuoM_gQFRdPYSk';
 const adminWallet = process.env.ADMIN_WALLET || defaultAdminWallet;
+const adminMnemonic = process.env.ADMIN_MNEMONIC || '';
 
 export const config = {
 	rpcEndpoint: rpcEndpoint as string,
 	adminWallet: adminWallet as string,
+	adminMnemonic: adminMnemonic.split(' '),
 };
 
 export const db = levelup(leveldown('./storage'));
@@ -19,7 +21,15 @@ export const client = new TonClient({
 	endpoint: config.rpcEndpoint,
 });
 
-const Opcodes = {
+export const Opcodes = {
+	// from minter repo: https://github.com/ton-blockchain/minter
+	changeAdmin: 3,
+	replaceMetadata: 4,
+	mint: 21,
+	internalTransfer: 0x178d4519,
+	transfer: 0xf8a7ea5,
+	burn: 0x595f07bc,
+	// for transaction history parse/detection
 	bareTransaction: 0,
 	jettonTransfer: 0x7362d09c,
 	nftTransfer: 0x05138d91,

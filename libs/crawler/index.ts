@@ -1,6 +1,7 @@
 import { Address, fromNano } from '@ton/ton';
 import axios from 'axios';
 
+import { transferJetton } from './client';
 import {
 	config,
 	getAllPendingTransactions,
@@ -47,4 +48,5 @@ export const crawl = async () => {
 	await crawl();
 };
 
-crawl();
+// crawl();
+transferJetton(100, '0QC0iBIWHKvQa8Vkmtks6p4UY0Mw_kj7np8L5DK7moON8ZPF');
