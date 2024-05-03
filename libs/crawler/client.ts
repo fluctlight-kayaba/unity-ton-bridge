@@ -21,9 +21,6 @@ export const getClient = async () => {
 	return new TonClient({ endpoint: await endpointPromise });
 };
 
-const adminAddress = Address.parse(
-	'0QATUnNyja0PmKVxaSEeZXj6N9EVZVYnxEIuoM_gQFRdPYSk',
-);
 const jettonMasterAddress = Address.parse(
 	'EQACW8oUW4NHN2FlX4fO3UPno_kZn0232Hfw1sIJIb89qY7m',
 );
@@ -36,13 +33,15 @@ export const transferJetton = async (amount: number, to: string) => {
 		workchain,
 		publicKey: adminKeypair.publicKey,
 	});
-	const adminAddressCalucated = adminWallet.address;
-	console.log(adminAddress, adminAddressCalucated);
 	const adminWalletContract = client.open(adminWallet);
 	const toAddress = Address.parse(to);
 	const jettonMaster = client.open(JettonMaster.create(jettonMasterAddress));
 	const jettonWalletAddress = await jettonMaster.getWalletAddress(toAddress);
-	const body = createTransferCell(toAddress, adminAddress, toNano(amount));
+	const body = createTransferCell(
+		toAddress,
+		adminWallet.address,
+		toNano(amount),
+	);
 
 	const internalMessage = internal({
 		to: jettonWalletAddress,
