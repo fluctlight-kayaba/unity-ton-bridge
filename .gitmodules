@@ -1,0 +1,3 @@
+[submodule "libs/minter"]
+	path = libs/minter
+	url = https://github.com/ton-blockchain/minter.git

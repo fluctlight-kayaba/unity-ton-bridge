@@ -19,6 +19,7 @@ export const purchaseGameToken = async (amount: number) => {
 		],
 		validUntil: new Date().getTime() + 1000 * 60 * 15, // 15 minutes
 	};
+
 	await tonConnection.sendTransaction(transaction);
 	console.log('Purchasing...', amount);
 };

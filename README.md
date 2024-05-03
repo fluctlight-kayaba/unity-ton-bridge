@@ -2,6 +2,9 @@
 - Unity Engine
 - Node.js
 
+### Pull submodules:
+- Run `git submodule update --init --recursive` to fetch submodules
+
 ### Game development cycle:
 - In Unity build WebGL under project-root/build/game
 - Run `yarn dev` (live reload) or `yarn build` to build javascript SDK for Unity TON
