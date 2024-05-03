@@ -1,6 +1,7 @@
 ### Required tools:
 - Unity Engine
 - Node.js
+- Install and configure [Yarn](https://yarnpkg.com/getting-started) version 4 or higher
 
 ### Pull submodules:
 - Run `git submodule update --init --recursive` to fetch submodules
