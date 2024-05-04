@@ -51,6 +51,7 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), unityConfig).then(function(unityInstance) {
+        if (window.onUnityReady) window.onUnityReady(unityInstance); 
         window.unityInstance = unityInstance;
       });
     </script>

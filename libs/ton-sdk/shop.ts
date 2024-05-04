@@ -1,7 +1,7 @@
 import { beginCell } from '@ton/core';
 import type { SendTransactionRequest } from '@tonconnect/sdk';
 
-import { gameTokensPerNanoTon, tonConnection } from './util';
+import { gameTokensPerNanoTon, tonConnectUI } from './util';
 
 export const purchaseGameToken = async (amount: number) => {
 	const transaction: SendTransactionRequest = {
@@ -20,6 +20,6 @@ export const purchaseGameToken = async (amount: number) => {
 		validUntil: new Date().getTime() + 1000 * 60 * 15, // 15 minutes
 	};
 
-	await tonConnection.sendTransaction(transaction);
+	await tonConnectUI.sendTransaction(transaction);
 	console.log('Purchasing...', amount);
 };

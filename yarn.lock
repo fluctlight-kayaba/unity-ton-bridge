@@ -3229,7 +3229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tonconnect/sdk@npm:^3.0.2":
+"@tonconnect/sdk@npm:3.0.2":
   version: 3.0.2
   resolution: "@tonconnect/sdk@npm:3.0.2"
   dependencies:
@@ -3237,6 +3237,18 @@ __metadata:
     "@tonconnect/isomorphic-fetch": "npm:^0.0.3"
     "@tonconnect/protocol": "npm:^2.2.6"
   checksum: 10c0/f511caa8241bd352120fbcb392fbaf2d2f020a9a83db16776c10d18be2577f500df9fd58ccdef8c41db5deeaf20dce812e8a1345ca7393b6b9e99c574e688851
+  languageName: node
+  linkType: hard
+
+"@tonconnect/ui@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@tonconnect/ui@npm:2.0.2"
+  dependencies:
+    "@tonconnect/sdk": "npm:3.0.2"
+    classnames: "npm:^2.3.2"
+    deepmerge: "npm:^4.2.2"
+    ua-parser-js: "npm:^1.0.35"
+  checksum: 10c0/203df88e390a2b9d57472153ba5f2d1ac08bb5feae205e1d43107e112a14c839c27c1c5c9ed4d04c406a8f0781d5df92fb149a7b79794bb488b68dce68e87abd
   languageName: node
   linkType: hard
 
@@ -4505,6 +4517,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.3.2":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+  languageName: node
+  linkType: hard
+
 "clean-stack@npm:^2.0.0":
   version: 2.2.0
   resolution: "clean-stack@npm:2.2.0"
@@ -4868,6 +4887,13 @@ __metadata:
   version: 0.1.4
   resolution: "deep-is@npm:0.1.4"
   checksum: 10c0/7f0ee496e0dff14a573dc6127f14c95061b448b87b995fc96c017ce0a1e66af1675e73f1d6064407975bc4ea6ab679497a29fff7b5b9c4e99cb10797c1ad0b4c
+  languageName: node
+  linkType: hard
+
+"deepmerge@npm:^4.2.2":
+  version: 4.3.1
+  resolution: "deepmerge@npm:4.3.1"
+  checksum: 10c0/e53481aaf1aa2c4082b5342be6b6d8ad9dfe387bc92ce197a66dea08bd4265904a087e75e464f14d1347cf2ac8afe1e4c16b266e0561cc5df29382d3c5f80044
   languageName: node
   linkType: hard
 
@@ -9372,7 +9398,7 @@ __metadata:
     "@ton/core": "npm:^0.56.3"
     "@ton/crypto": "npm:^3.2.0"
     "@ton/ton": "npm:^13.11.1"
-    "@tonconnect/sdk": "npm:^3.0.2"
+    "@tonconnect/ui": "npm:^2.0.2"
     "@types/bn.js": "npm:^5"
     "@types/express": "npm:^4"
     "@types/leveldown": "npm:^4.0.6"
@@ -9568,6 +9594,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^1.0.35":
+  version: 1.0.37
+  resolution: "ua-parser-js@npm:1.0.37"
+  checksum: 10c0/dac8cf82a55b2e097bd2286954e01454c4cfcf23c9d9b56961ce94bda3cec5a38ca536e6e84c20a4000a9d4b4a4abcbd98ec634ccebe21be36595ea3069126e4
   languageName: node
   linkType: hard
 

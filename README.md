@@ -21,3 +21,4 @@
 
 ### Mint Jetton token for testing:
 - Do it at: https://minter.ton.org/
+- For testnet, use: https://minter.ton.org/?testnet=true
