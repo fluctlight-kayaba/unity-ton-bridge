@@ -1,38 +1,46 @@
 import type { ExternalAddress } from '@ton/core';
 import type { Address, Transaction } from '@ton/core';
+import { Network, getHttpEndpoint } from "@orbs-network/ton-access";
 import { TonClient } from '@ton/ton';
 import leveldown from 'leveldown';
 import levelup from 'levelup';
 
-const defaultEndpoint = 'https://testnet.toncenter.com/api/v2/jsonRPC';
-const rpcEndpoint = process.env.RPC_ENDPOINT || defaultEndpoint;
+const defaultNetwork = 'mainnet';
+const network = process.env.TON_NETWORK || defaultNetwork;
 const defaultAdminWallet = '0QATUnNyja0PmKVxaSEeZXj6N9EVZVYnxEIuoM_gQFRdPYSk';
 const adminWallet = process.env.ADMIN_WALLET || defaultAdminWallet;
-const adminMnemonic = process.env.ADMIN_MNEMONIC || '';
+const adminMnemonic = process.env.ADMIN_MNEMONIC || 'box naive upgrade scatter easy dumb post obscure runway thought float feel aisle divorce dumb magic cost urge pact ozone pen audit simple author';
 
 export const config = {
-	rpcEndpoint: rpcEndpoint as string,
+	rpcEndpoint: network as Network,
 	adminWallet: adminWallet as string,
 	adminMnemonic: adminMnemonic.split(' '),
 };
 
+let client: TonClient;
 export const db = levelup(leveldown('./storage'));
-export const client = new TonClient({
-	endpoint: config.rpcEndpoint,
-});
+export const getClient = async () => {
+	if (!client) {
+		const endpoint = await getHttpEndpoint({ network: 'testnet' });
+		client = new TonClient({ endpoint });
+	}
+	return client;
+}
 
 export const Opcodes = {
 	// from minter repo: https://github.com/ton-blockchain/minter
-	changeAdmin: 3,
-	replaceMetadata: 4,
-	mint: 21,
-	internalTransfer: 0x178d4519,
-	transfer: 0xf8a7ea5,
-	burn: 0x595f07bc,
+	ChangeAdmin: 3,
+	ReplaceMetadata: 4,
+	Mint: 21,
+	InternalTransfer: 0x178d4519,
+	Transfer: 0xf8a7ea5,
+	Burn: 0x595f07bc,
+	WithdrawTons: 0x6d8e5e3c,
+	WithdrawJettons: 0x768a50b2,
 	// for transaction history parse/detection
-	bareTransaction: 0,
-	jettonTransfer: 0x7362d09c,
-	nftTransfer: 0x05138d91,
+	BareTransaction: 0,
+	JettonTransfer: 0x7362d09c,
+	NftTransfer: 0x05138d91,
 };
 
 export interface CrawlerCursor {
@@ -156,9 +164,9 @@ export const parseTransactionInfo = async ({
 		if (body.remainingBits >= 32) {
 			const op = body.loadUint(32);
 
-			if (op === Opcodes.bareTransaction) {
+			if (op === Opcodes.BareTransaction) {
 				info.comment = body.loadStringTail();
-			} else if (op === Opcodes.jettonTransfer) {
+			} else if (op === Opcodes.JettonTransfer) {
 				body.skip(64); // skip queryId
 				info.type = 'jetton';
 				info.jettonValue = body.loadCoins();
@@ -172,11 +180,11 @@ export const parseTransactionInfo = async ({
 				if (forwardPayload.remainingBits >= 32) {
 					const forwardOp = forwardPayload.loadUint(32);
 
-					if (forwardOp === Opcodes.bareTransaction) {
+					if (forwardOp === Opcodes.BareTransaction) {
 						info.comment = forwardPayload.loadStringTail();
 					}
 				}
-			} else if (op === Opcodes.nftTransfer) {
+			} else if (op === Opcodes.NftTransfer) {
 				body.skip(64); // skip queryId
 				info.type = 'nft';
 				info.nftFromOwner = body.loadAddress();
@@ -189,7 +197,7 @@ export const parseTransactionInfo = async ({
 				if (forwardPayload.remainingBits >= 32) {
 					const forwardOp = forwardPayload.loadUint(32);
 
-					if (forwardOp === Opcodes.bareTransaction) {
+					if (forwardOp === Opcodes.BareTransaction) {
 						info.comment = forwardPayload.loadStringTail();
 					}
 				}
